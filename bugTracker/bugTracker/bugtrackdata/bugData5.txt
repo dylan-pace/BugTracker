@@ -1,0 +1,7 @@
+Description: second bug
+Name of Logger: Dylan 
+Date Logged: 03 November 2018
+Class where bug can be found: form1
+Method where bug can be found about_click
+Line where bug starts 2
+Line where bug ends: 4

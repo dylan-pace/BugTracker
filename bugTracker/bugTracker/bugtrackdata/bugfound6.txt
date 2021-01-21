@@ -1,0 +1,7 @@
+Description: bug found
+Name of Logger: dylan
+Date Logged: 03 November 2018
+Class where bug can be found: form1
+Method where bug can be found click
+Line where bug starts 1
+Line where bug ends: 2

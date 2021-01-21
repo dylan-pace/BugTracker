@@ -1,0 +1,7 @@
+Description: seven bug
+Name of Logger: Dylan Pace
+Date Logged: 02 November 2018
+Class where bug can be found: form3
+Method where bug can be found about_Click
+Line where bug starts 1
+Line where bug ends: 3

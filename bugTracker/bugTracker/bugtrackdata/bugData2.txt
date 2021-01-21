@@ -1,0 +1,7 @@
+Description: bug seven
+Name of Logger: Dylan
+Date Logged: 02 November 2018
+Class where bug can be found: form2
+Method where bug can be found about
+Line where bug starts 1
+Line where bug ends: 5

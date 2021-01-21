@@ -1,0 +1,109 @@
+<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">using</span> System;
+<span style="color:Blue;">using</span> System.Collections.Generic;
+<span style="color:Blue;">using</span> System.ComponentModel;
+<span style="color:Blue;">using</span> System.Data;
+<span style="color:Blue;">using</span> System.Drawing;
+<span style="color:Blue;">using</span> System.IO;
+<span style="color:Blue;">using</span> System.Linq;
+<span style="color:Blue;">using</span> System.Text;
+<span style="color:Blue;">using</span> System.Threading.Tasks;
+<span style="color:Blue;">using</span> System.Windows.Forms;
+<span style="color:Blue;">using</span> ColorCode;
+
+<span style="color:Blue;">namespace</span> bugTracker
+{
+    <span style="color:Blue;">public</span> <span style="color:Blue;">partial</span> <span style="color:Blue;">class</span> Form1 : Form
+    {
+
+        <span style="color:Blue;">public</span> Form1()
+        {
+           
+            InitializeComponent();
+            webBrowser1.DocumentText = <span style="color:#A31515;">&quot;&lt;HTML&gt;&lt;BODY contentEditable=&#39;true&#39;&gt;&lt;/BODY&gt;&lt;/HTML&gt;&quot;</span>;
+
+        }
+
+        <span style="color:Blue;">private</span> <span style="color:Blue;">void</span> aboutToolStripMenuItem_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+        {
+            String message = <span style="color:#A31515;">&quot;This program is used to track bugs in code.&quot;</span>;
+            String caption = <span style="color:#A31515;">&quot;About this program&quot;</span>;
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            DialogResult result;
+
+            result = MessageBox.Show(message, caption, buttons);
+
+        }
+
+        <span style="color:Blue;">private</span> <span style="color:Blue;">void</span> exitToolStripMenuItem_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+        {
+            String message = <span style="color:#A31515;">&quot;Exit the program?&quot;</span>;
+            String caption = <span style="color:#A31515;">&quot;Exit&quot;</span>;
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            result = MessageBox.Show(message, caption, buttons);
+
+            <span style="color:Blue;">if</span>(result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        <span style="color:Blue;">private</span> <span style="color:Blue;">void</span> openToolStripMenuItem_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+        {
+            <span style="color:Green;">//String path;</span>
+            OpenFileDialog file = <span style="color:Blue;">new</span> OpenFileDialog();
+            <span style="color:Blue;">if</span>(file.ShowDialog() == DialogResult.OK)
+            {
+                <span style="color:Green;">//path = file.FileName;</span>
+
+                <span style="color:Green;">//richTextBox1.LoadFile(file.FileName, RichTextBoxStreamType.PlainText);</span>
+
+                <span style="color:Blue;">string</span> sourceCode = File.ReadAllText(file.FileName);
+
+                <span style="color:Blue;">string</span> colorizedSourceCode = <span style="color:Blue;">new</span> CodeColorizer().Colorize(sourceCode, Languages.CSharp);
+
+                <span style="color:Green;">//webBrowser1.Text = colorizedSourceCode;</span>
+
+                webBrowser1.DocumentText = colorizedSourceCode;
+
+                webBrowser1.DocumentText = <span style="color:#A31515;">&quot;&lt;HTML&gt;&lt;BODY contentEditable=&#39;true&#39;&gt;&lt;/BODY&gt;&lt;/HTML&gt;&quot;</span>;
+
+                System.IO.StreamReader txtReader;
+                txtReader = <span style="color:Blue;">new</span> System.IO.StreamReader(file.FileName);
+                webBrowser1.DocumentText = txtReader.ReadToEnd();
+                txtReader.Close();
+                txtReader = <span style="color:Blue;">null</span>;
+                HtmlDocument doc = webBrowser1.Document.OpenNew(<span style="color:Blue;">false</span>);
+                doc.ExecCommand(<span style="color:#A31515;">&quot;EditMode&quot;</span>, <span style="color:Blue;">false</span>, <span style="color:Blue;">null</span>);
+
+
+
+            }
+
+        }
+
+        <span style="color:Blue;">private</span> <span style="color:Blue;">void</span> saveToolStripMenuItem_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+        {
+            SaveFileDialog saveFile = <span style="color:Blue;">new</span> SaveFileDialog();
+            saveFile.DefaultExt = <span style="color:#A31515;">&quot;*.txt&quot;</span>;
+
+            <span style="color:Blue;">if</span>(saveFile.ShowDialog() == DialogResult.OK &amp;&amp; saveFile.FileName.Length &gt; 0)
+            {
+                webBrowser1.ShowSaveAsDialog();
+            }
+        }
+
+        <span style="color:Blue;">private</span> <span style="color:Blue;">void</span> logBugToolStripMenuItem_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+        {
+           <span style="color:Green;">// Application.EnableVisualStyles();</span>
+          <span style="color:Green;">//  Application.SetCompatibleTextRenderingDefault(false);</span>
+           <span style="color:Green;">// Application.Run(new Form2());</span>
+            Form2 form2 = <span style="color:Blue;">new</span> Form2();
+            form2.Show();
+        }
+    }
+}
+
+</pre></div>
